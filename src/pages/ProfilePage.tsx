@@ -94,12 +94,10 @@ export default function ProfilePage() {
           <div className="flex items-center gap-3">
             <Avatar className="w-9 h-9">
               <AvatarImage src={avatarImg} alt="User Avatar" />
-              {/* --- PERUBAHAN DI SINI --- */}
               <AvatarFallback>
                 {user?.name?.charAt(0).toUpperCase() || "U"}
               </AvatarFallback>
             </Avatar>
-            {/* --- PERUBAHAN DI SINI --- */}
             <span className="text-xs font-medium text-slate-900">
               {user?.name || "Username"}
             </span>
@@ -107,7 +105,6 @@ export default function ProfilePage() {
         </div>
       </nav>
 
-      {/* Tampilkan main content hanya jika user ada */}
       {user && (
         <main className="max-w-4xl mx-auto py-10 px-6">
           <div className="border-b pb-4 mb-6">
@@ -124,7 +121,6 @@ export default function ProfilePage() {
                   </AvatarFallback>
                 </Avatar>
                 <div className="text-center md:text-left">
-                  {/* --- PERUBAHAN DI SINI --- */}
                   <Typography variant="h3">
                     {user.name || "Username"}
                   </Typography>

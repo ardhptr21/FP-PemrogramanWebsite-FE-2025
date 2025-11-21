@@ -38,7 +38,7 @@ export default function MyProjectsPage() {
     const fetchProjects = async () => {
       try {
         setLoading(true);
-        const response = await api.get("/api/games");
+        const response = await api.get("/api/game");
         setProjects(response.data.data);
       } catch (err) {
         setError("Failed to fetch projects. Please try again later.");
@@ -81,32 +81,21 @@ export default function MyProjectsPage() {
     </nav>
   );
 
-  if (loading) {
+  if (loading)
     return (
-      <div className="w-full h-screen flex flex-col">
-        <Navbar />
-        <div className="flex-grow flex justify-center items-center">
-          <Typography variant="h3">Loading your projects...</Typography>
-        </div>
+      <div className="w-full h-screen flex justify-center items-center">
+        <Typography variant="h3">Loading...</Typography>
       </div>
     );
-  }
-
-  // Tampilan saat terjadi error
-  if (error) {
+  if (error)
     return (
-      <div className="w-full h-screen flex flex-col">
-        <Navbar />
-        <div className="flex-grow flex justify-center items-center">
-          <Typography variant="h3" className="text-destructive">
-            {error}
-          </Typography>
-        </div>
+      <div className="w-full h-screen flex justify-center items-center">
+        <Typography variant="h3" className="text-destructive">
+          {error}
+        </Typography>
       </div>
     );
-  }
 
-  // Komponen untuk tampilan saat tidak ada proyek (tidak berubah)
   const EmptyState = () => (
     <Card className="flex flex-col items-center justify-center text-center p-12 md:p-20 mt-6">
       <img
@@ -128,7 +117,6 @@ export default function MyProjectsPage() {
     </Card>
   );
 
-  // Komponen untuk menampilkan daftar proyek
   const ProjectList = () => (
     <div className="mt-6 space-y-4">
       {projects.map((project) => (
@@ -136,7 +124,7 @@ export default function MyProjectsPage() {
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-center gap-4">
               <img
-                src={project.thumbnail || thumbnailPlaceholder} // Gunakan placeholder jika thumbnail null
+                src={project.thumbnail || thumbnailPlaceholder}
                 alt={project.title}
                 className="w-24 h-16 rounded-md object-cover"
               />
@@ -228,7 +216,6 @@ export default function MyProjectsPage() {
           />
           <Input placeholder="Search your projects..." className="pl-10" />
         </div>
-        {/* Render EmptyState atau ProjectList berdasarkan data */}
         {projects.length === 0 ? <EmptyState /> : <ProjectList />}
       </main>
     </div>
