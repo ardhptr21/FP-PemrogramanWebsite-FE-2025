@@ -855,6 +855,25 @@ const PairOrNoPairGame = () => {
     setScore(0); // Reset score
     setMaxCombo(0); // Reset max combo
 
+    // Safety check: ensure we have items to play with
+    let gameItems = items;
+    if (!gameItems || gameItems.length === 0) {
+      console.warn("Items empty at start, using fallback");
+      gameItems = [
+        { id: "1", left_content: "Cat", right_content: catImage },
+        { id: "2", left_content: "Dog", right_content: dogImage },
+        { id: "3", left_content: "Apple", right_content: appleImage },
+        { id: "4", left_content: "Banana", right_content: bananaImage },
+        { id: "5", left_content: "Book", right_content: bookImage },
+        { id: "6", left_content: "Camera", right_content: cameraImage },
+        { id: "7", left_content: "Bird", right_content: birdImage },
+        { id: "8", left_content: "Strawberry", right_content: strawberryImage },
+        { id: "9", left_content: "Watch", right_content: watchImage },
+        { id: "10", left_content: "Elephant", right_content: elephantImage },
+      ];
+      setItems(gameItems);
+    }
+
     // Set initial timer based on difficulty
     // Easy: starts at 0 (counts up), Normal: 120s countdown, Hard: 45s countdown
     if (difficulty === "easy") {
@@ -869,11 +888,11 @@ const PairOrNoPairGame = () => {
     // This ensures audio works even if autoplay was blocked
     playIntroBGM();
 
-    const leftCards: StackCard[] = items.map((item) => ({
+    const leftCards: StackCard[] = gameItems.map((item) => ({
       id: item.id,
       content: item.left_content,
     }));
-    const rightCards: StackCard[] = items.map((item) => ({
+    const rightCards: StackCard[] = gameItems.map((item) => ({
       id: item.id,
       content: item.right_content,
     }));
